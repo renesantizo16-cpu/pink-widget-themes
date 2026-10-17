@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "themes": [
+    {
+      "id": "strawberry-milk",
+      "name": "Strawberry Milk",
+      "emoji": "🍓",
+      "description": "Creamy blush pink with strawberry-sweet messages",
+      "palette": { "bg": "#fff0f2", "edge": "#f2bfc7", "ink": "#874455", "accent": "#e46d90", "soft": "#ffe2eb" },
+      "layout": "split",
+      "widgets": ["clock", "calendar", "quote", "note"],
+      "quote": "Life is sweeter with a little love. ♡",
+      "note": "Today's forecast: little joys and big smiles! 🍓",
+      "countdown_title": "Our special day",
+      "countdown_date": "2026-12-25"
+    },
+    {
+      "id": "pink-moonlight",
+      "name": "Pink Moonlight",
+      "emoji": "🌙",
+      "description": "Dreamy pale lilac and soft rose for cozy evenings",
+      "palette": { "bg": "#f8ecfa", "edge": "#e7cbe8", "ink": "#64486d", "accent": "#c281bd", "soft": "#f2def3" },
+      "layout": "right",
+      "widgets": ["clock", "quote", "countdown"],
+      "quote": "Even the stars are cheering for you. ✨",
+      "note": "You deserve gentle, beautiful moments. ♡",
+      "countdown_title": "Christmas magic",
+      "countdown_date": "2026-12-25"
+    },
+    {
+      "id": "rose-garden",
+      "name": "Rose Garden",
+      "emoji": "🌹",
+      "description": "Warm rose petals and old-fashioned romance",
+      "palette": { "bg": "#fff3f1", "edge": "#f2c8c1", "ink": "#7e4d56", "accent": "#d68a9a", "soft": "#ffdfdb" },
+      "layout": "left",
+      "widgets": ["clock", "calendar", "quote"],
+      "quote": "A little more love in every ordinary day. ♡",
+      "note": "You make life beautiful.",
+      "countdown_title": "A lovely occasion",
+      "countdown_date": "2026-12-25"
+    }
+  ]
+}
