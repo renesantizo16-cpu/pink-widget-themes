@@ -1,0 +1,133 @@
+{
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": 1
+    },
+    "themes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "maxLength": 80
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "emoji": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "palette": {
+            "type": "object",
+            "properties": {
+              "bg": {
+                "type": "string",
+                "pattern": "^#[0-9a-fA-F]{6}$"
+              },
+              "edge": {
+                "type": "string",
+                "pattern": "^#[0-9a-fA-F]{6}$"
+              },
+              "ink": {
+                "type": "string",
+                "pattern": "^#[0-9a-fA-F]{6}$"
+              },
+              "accent": {
+                "type": "string",
+                "pattern": "^#[0-9a-fA-F]{6}$"
+              },
+              "soft": {
+                "type": "string",
+                "pattern": "^#[0-9a-fA-F]{6}$"
+              }
+            },
+            "required": [
+              "bg",
+              "edge",
+              "ink",
+              "accent",
+              "soft"
+            ],
+            "additionalProperties": false
+          },
+          "layout": {
+            "enum": [
+              "split",
+              "left",
+              "right"
+            ]
+          },
+          "widgets": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "clock",
+                "calendar",
+                "quote",
+                "note",
+                "countdown"
+              ]
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "quote": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "note": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "countdown_title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "countdown_date": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "emoji",
+          "description",
+          "palette",
+          "layout",
+          "widgets",
+          "quote",
+          "note",
+          "countdown_title",
+          "countdown_date"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 13,
+      "maxItems": 13
+    }
+  },
+  "required": [
+    "schema",
+    "themes"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pink-widget-studio.invalid/schemas/v1/legacy.schema.json",
+  "title": "Pink Widget Studio legacy v1"
+}

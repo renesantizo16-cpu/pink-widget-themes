@@ -1,0 +1,1119 @@
+{
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "release": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "families": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "enum": [
+              "coquette-pink",
+              "soft-elegant",
+              "minimalist",
+              "halloween",
+              "christmas",
+              "fall",
+              "winter"
+            ]
+          },
+          "name": {
+            "enum": [
+              "Coquette Pink",
+              "Soft Elegant",
+              "Minimalist",
+              "Halloween",
+              "Christmas",
+              "Fall",
+              "Winter"
+            ]
+          },
+          "palettes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "maxLength": 80
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 240
+                },
+                "colors": {
+                  "type": "object",
+                  "properties": {
+                    "bg": {
+                      "type": "string",
+                      "pattern": "^#[0-9a-fA-F]{6}$"
+                    },
+                    "edge": {
+                      "type": "string",
+                      "pattern": "^#[0-9a-fA-F]{6}$"
+                    },
+                    "ink": {
+                      "type": "string",
+                      "pattern": "^#[0-9a-fA-F]{6}$"
+                    },
+                    "accent": {
+                      "type": "string",
+                      "pattern": "^#[0-9a-fA-F]{6}$"
+                    },
+                    "soft": {
+                      "type": "string",
+                      "pattern": "^#[0-9a-fA-F]{6}$"
+                    }
+                  },
+                  "required": [
+                    "bg",
+                    "edge",
+                    "ink",
+                    "accent",
+                    "soft"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "colors"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 3,
+            "maxItems": 3
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "palettes"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 7,
+      "maxItems": 7
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "maxLength": 80
+          },
+          "resource": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "pattern": "^(?:[a-zA-Z0-9_-][a-zA-Z0-9_.-]*/)*[a-zA-Z0-9_.-]+\\.(?:json|png)$",
+                "maxLength": 240
+              },
+              "bytes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 8388608
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            },
+            "required": [
+              "path",
+              "bytes",
+              "sha256"
+            ],
+            "additionalProperties": false
+          },
+          "mediaType": {
+            "const": "image/png"
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2560
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1600
+          },
+          "alt": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          }
+        },
+        "required": [
+          "id",
+          "resource",
+          "mediaType",
+          "width",
+          "height",
+          "alt"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 500
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "maxLength": 80
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "familyId": {
+                "enum": [
+                  "coquette-pink",
+                  "soft-elegant",
+                  "minimalist",
+                  "halloween",
+                  "christmas",
+                  "fall",
+                  "winter"
+                ]
+              },
+              "paletteId": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "maxLength": 80
+              },
+              "type": {
+                "const": "clock"
+              },
+              "config": {
+                "type": "object",
+                "properties": {
+                  "style": {
+                    "enum": [
+                      "digital",
+                      "analog"
+                    ]
+                  },
+                  "hourCycle": {
+                    "enum": [
+                      "system",
+                      "12",
+                      "24"
+                    ]
+                  },
+                  "showSeconds": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "style",
+                  "hourCycle",
+                  "showSeconds"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "familyId",
+              "paletteId",
+              "type",
+              "config"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "maxLength": 80
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "familyId": {
+                "enum": [
+                  "coquette-pink",
+                  "soft-elegant",
+                  "minimalist",
+                  "halloween",
+                  "christmas",
+                  "fall",
+                  "winter"
+                ]
+              },
+              "paletteId": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "maxLength": 80
+              },
+              "type": {
+                "const": "calendar"
+              },
+              "config": {
+                "type": "object",
+                "properties": {
+                  "firstWeekday": {
+                    "enum": [
+                      "system",
+                      "monday",
+                      "sunday"
+                    ]
+                  },
+                  "showWeekNumbers": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "firstWeekday",
+                  "showWeekNumbers"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "familyId",
+              "paletteId",
+              "type",
+              "config"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "maxLength": 80
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "familyId": {
+                "enum": [
+                  "coquette-pink",
+                  "soft-elegant",
+                  "minimalist",
+                  "halloween",
+                  "christmas",
+                  "fall",
+                  "winter"
+                ]
+              },
+              "paletteId": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "maxLength": 80
+              },
+              "type": {
+                "const": "note"
+              },
+              "config": {
+                "type": "object",
+                "properties": {
+                  "placeholder": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 240
+                  },
+                  "maxCharacters": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10000
+                  }
+                },
+                "required": [
+                  "placeholder",
+                  "maxCharacters"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "familyId",
+              "paletteId",
+              "type",
+              "config"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "maxLength": 80
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "familyId": {
+                "enum": [
+                  "coquette-pink",
+                  "soft-elegant",
+                  "minimalist",
+                  "halloween",
+                  "christmas",
+                  "fall",
+                  "winter"
+                ]
+              },
+              "paletteId": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "maxLength": 80
+              },
+              "type": {
+                "const": "wallpaper"
+              },
+              "config": {
+                "type": "object",
+                "properties": {
+                  "assetId": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "maxLength": 80
+                  },
+                  "fit": {
+                    "enum": [
+                      "fill",
+                      "fit"
+                    ]
+                  }
+                },
+                "required": [
+                  "assetId",
+                  "fit"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "familyId",
+              "paletteId",
+              "type",
+              "config"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "maxLength": 80
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "familyId": {
+                "enum": [
+                  "coquette-pink",
+                  "soft-elegant",
+                  "minimalist",
+                  "halloween",
+                  "christmas",
+                  "fall",
+                  "winter"
+                ]
+              },
+              "paletteId": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "maxLength": 80
+              },
+              "type": {
+                "const": "sticker"
+              },
+              "config": {
+                "type": "object",
+                "properties": {
+                  "assetId": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "maxLength": 80
+                  },
+                  "defaultWidth": {
+                    "type": "integer",
+                    "minimum": 16,
+                    "maximum": 512
+                  }
+                },
+                "required": [
+                  "assetId",
+                  "defaultWidth"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "familyId",
+              "paletteId",
+              "type",
+              "config"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "maxLength": 80
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "familyId": {
+                "enum": [
+                  "coquette-pink",
+                  "soft-elegant",
+                  "minimalist",
+                  "halloween",
+                  "christmas",
+                  "fall",
+                  "winter"
+                ]
+              },
+              "paletteId": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "maxLength": 80
+              },
+              "type": {
+                "const": "theme-pack"
+              },
+              "components": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "maxLength": 80
+                },
+                "minItems": 1,
+                "maxItems": 20,
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "familyId",
+              "paletteId",
+              "type",
+              "components"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "maxLength": 80
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "familyId": {
+                "enum": [
+                  "coquette-pink",
+                  "soft-elegant",
+                  "minimalist",
+                  "halloween",
+                  "christmas",
+                  "fall",
+                  "winter"
+                ]
+              },
+              "paletteId": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "maxLength": 80
+              },
+              "type": {
+                "const": "theme-pack"
+              },
+              "legacyTheme": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "maxLength": 80
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 240
+                  },
+                  "emoji": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 240
+                  },
+                  "description": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 240
+                  },
+                  "palette": {
+                    "type": "object",
+                    "properties": {
+                      "bg": {
+                        "type": "string",
+                        "pattern": "^#[0-9a-fA-F]{6}$"
+                      },
+                      "edge": {
+                        "type": "string",
+                        "pattern": "^#[0-9a-fA-F]{6}$"
+                      },
+                      "ink": {
+                        "type": "string",
+                        "pattern": "^#[0-9a-fA-F]{6}$"
+                      },
+                      "accent": {
+                        "type": "string",
+                        "pattern": "^#[0-9a-fA-F]{6}$"
+                      },
+                      "soft": {
+                        "type": "string",
+                        "pattern": "^#[0-9a-fA-F]{6}$"
+                      }
+                    },
+                    "required": [
+                      "bg",
+                      "edge",
+                      "ink",
+                      "accent",
+                      "soft"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "layout": {
+                    "enum": [
+                      "split",
+                      "left",
+                      "right"
+                    ]
+                  },
+                  "widgets": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "clock",
+                        "calendar",
+                        "quote",
+                        "note",
+                        "countdown"
+                      ]
+                    },
+                    "minItems": 1,
+                    "uniqueItems": true
+                  },
+                  "quote": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 240
+                  },
+                  "note": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 240
+                  },
+                  "countdown_title": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 240
+                  },
+                  "countdown_date": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                },
+                "required": [
+                  "id",
+                  "name",
+                  "emoji",
+                  "description",
+                  "palette",
+                  "layout",
+                  "widgets",
+                  "quote",
+                  "note",
+                  "countdown_title",
+                  "countdown_date"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "familyId",
+              "paletteId",
+              "type",
+              "legacyTheme"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 1000
+    },
+    "home": {
+      "type": "object",
+      "properties": {
+        "defaultBanner": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "maxLength": 80
+            },
+            "message": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 240
+            },
+            "headline": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 240
+            },
+            "subtitle": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 240
+            },
+            "image": {
+              "type": "object",
+              "properties": {
+                "assetId": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "maxLength": 80
+                },
+                "alt": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 240
+                }
+              },
+              "required": [
+                "assetId",
+                "alt"
+              ],
+              "additionalProperties": false
+            },
+            "button": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 240
+                },
+                "action": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "open-item"
+                        },
+                        "itemId": {
+                          "type": "string",
+                          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                          "maxLength": 80
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "itemId"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "open-url"
+                        },
+                        "url": {
+                          "type": "string",
+                          "format": "uri",
+                          "pattern": "^https://[^/@?#]+(?:/|$)"
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "url"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "label",
+                "action"
+              ],
+              "additionalProperties": false
+            },
+            "imageId": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "maxLength": 80
+            },
+            "action": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "const": "open-item"
+                    },
+                    "itemId": {
+                      "type": "string",
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "maxLength": 80
+                    },
+                    "label": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 240
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "itemId",
+                    "label"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "const": "open-url"
+                    },
+                    "url": {
+                      "type": "string",
+                      "format": "uri",
+                      "pattern": "^https://[^/@?#]+(?:/|$)"
+                    },
+                    "label": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 240
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "url",
+                    "label"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "message"
+          ],
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "not": {
+                "required": [
+                  "image",
+                  "imageId"
+                ]
+              }
+            },
+            {
+              "not": {
+                "required": [
+                  "button",
+                  "action"
+                ]
+              }
+            }
+          ]
+        },
+        "banners": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "maxLength": 80
+              },
+              "message": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "headline": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "subtitle": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "image": {
+                "type": "object",
+                "properties": {
+                  "assetId": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "maxLength": 80
+                  },
+                  "alt": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 240
+                  }
+                },
+                "required": [
+                  "assetId",
+                  "alt"
+                ],
+                "additionalProperties": false
+              },
+              "button": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 240
+                  },
+                  "action": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "const": "open-item"
+                          },
+                          "itemId": {
+                            "type": "string",
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                            "maxLength": 80
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "itemId"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "const": "open-url"
+                          },
+                          "url": {
+                            "type": "string",
+                            "format": "uri",
+                            "pattern": "^https://[^/@?#]+(?:/|$)"
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "url"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "label",
+                  "action"
+                ],
+                "additionalProperties": false
+              },
+              "imageId": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "maxLength": 80
+              },
+              "action": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "open-item"
+                      },
+                      "itemId": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                        "maxLength": 80
+                      },
+                      "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 240
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "itemId",
+                      "label"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "open-url"
+                      },
+                      "url": {
+                        "type": "string",
+                        "format": "uri",
+                        "pattern": "^https://[^/@?#]+(?:/|$)"
+                      },
+                      "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 240
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "url",
+                      "label"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "startsAt": {
+                "type": "string",
+                "format": "date-time",
+                "pattern": "Z$"
+              },
+              "endsAt": {
+                "type": "string",
+                "format": "date-time",
+                "pattern": "Z$"
+              },
+              "priority": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            "required": [
+              "id",
+              "message",
+              "priority"
+            ],
+            "additionalProperties": false,
+            "allOf": [
+              {
+                "not": {
+                  "required": [
+                    "image",
+                    "imageId"
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "required": [
+                    "button",
+                    "action"
+                  ]
+                }
+              }
+            ]
+          },
+          "maxItems": 50
+        }
+      },
+      "required": [
+        "defaultBanner",
+        "banners"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "release",
+    "families",
+    "assets",
+    "items",
+    "home"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pink-widget-studio.invalid/schemas/v1/catalog.schema.json",
+  "title": "Pink Widget Studio catalog v1"
+}

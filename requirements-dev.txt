@@ -1,0 +1,2 @@
+# Publishing tools only; never needed by the Mac application.
+jsonschema==4.26.0

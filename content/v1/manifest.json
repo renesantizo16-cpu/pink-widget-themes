@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "release": "1.0.1",
+  "publishedAt": "2026-10-18T00:00:00Z",
+  "minimumAppVersion": "5.0.0",
+  "minimumOSVersion": "12.0",
+  "catalog": {
+    "path": "releases/1.0.1/catalog.json",
+    "bytes": 22571,
+    "sha256": "1e3017ece93ffaf1a9600909ec6c08426cb222a62edadc4169c5fbeacf0a30a6"
+  },
+  "legacyPath": "../../widget-themes.json",
+  "refreshAfterSeconds": 900
+}

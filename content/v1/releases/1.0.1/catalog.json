@@ -1,0 +1,824 @@
+{
+  "schemaVersion": 1,
+  "release": "1.0.1",
+  "families": [
+    {
+      "id": "coquette-pink",
+      "name": "Coquette Pink",
+      "palettes": [
+        {
+          "id": "coquette-pink-classic-coquette",
+          "name": "Classic Coquette",
+          "colors": {
+            "bg": "#FFF0F5",
+            "edge": "#E8B4C8",
+            "ink": "#66384F",
+            "accent": "#D75B91",
+            "soft": "#FADDE9"
+          }
+        },
+        {
+          "id": "coquette-pink-rose-petal",
+          "name": "Rose Petal",
+          "colors": {
+            "bg": "#FFF5F4",
+            "edge": "#DFB2B7",
+            "ink": "#6D3E48",
+            "accent": "#BB687D",
+            "soft": "#F4DCDD"
+          }
+        },
+        {
+          "id": "coquette-pink-champagne-blush",
+          "name": "Champagne Blush",
+          "colors": {
+            "bg": "#FFF8EF",
+            "edge": "#DCC4A2",
+            "ink": "#665044",
+            "accent": "#C79391",
+            "soft": "#F3E2D4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "soft-elegant",
+      "name": "Soft Elegant",
+      "palettes": [
+        {
+          "id": "soft-elegant-warm-linen",
+          "name": "Warm Linen",
+          "colors": {
+            "bg": "#FAF6ED",
+            "edge": "#D8C9B4",
+            "ink": "#54483B",
+            "accent": "#A58A6B",
+            "soft": "#EEE5D6"
+          }
+        },
+        {
+          "id": "soft-elegant-botanical-blush",
+          "name": "Botanical Blush",
+          "colors": {
+            "bg": "#F8F5EF",
+            "edge": "#B7C4AE",
+            "ink": "#3F5143",
+            "accent": "#B87E88",
+            "soft": "#E5EBDD"
+          }
+        },
+        {
+          "id": "soft-elegant-taupe-rose",
+          "name": "Taupe Rose",
+          "colors": {
+            "bg": "#F7F1EF",
+            "edge": "#CBB8B3",
+            "ink": "#58474A",
+            "accent": "#AA7E88",
+            "soft": "#EADDDC"
+          }
+        }
+      ]
+    },
+    {
+      "id": "minimalist",
+      "name": "Minimalist",
+      "palettes": [
+        {
+          "id": "minimalist-warm-minimal",
+          "name": "Warm Minimal",
+          "colors": {
+            "bg": "#FAF8F2",
+            "edge": "#D7D1C5",
+            "ink": "#37352F",
+            "accent": "#8B7764",
+            "soft": "#EFEAE1"
+          }
+        },
+        {
+          "id": "minimalist-stone-and-blush",
+          "name": "Stone & Blush",
+          "colors": {
+            "bg": "#F4F3F1",
+            "edge": "#CAC5C2",
+            "ink": "#484143",
+            "accent": "#B58291",
+            "soft": "#EAE0E3"
+          }
+        },
+        {
+          "id": "minimalist-charcoal-contrast",
+          "name": "Charcoal Contrast",
+          "colors": {
+            "bg": "#25282D",
+            "edge": "#606670",
+            "ink": "#FAF7F5",
+            "accent": "#E9A8BC",
+            "soft": "#373C44"
+          }
+        }
+      ]
+    },
+    {
+      "id": "halloween",
+      "name": "Halloween",
+      "palettes": [
+        {
+          "id": "halloween-pink-pumpkin-patch",
+          "name": "Pink Pumpkin Patch",
+          "colors": {
+            "bg": "#FFF0E8",
+            "edge": "#E5B39C",
+            "ink": "#633E35",
+            "accent": "#C66C80",
+            "soft": "#F9DBCA"
+          }
+        },
+        {
+          "id": "halloween-lavender-ghost",
+          "name": "Lavender Ghost",
+          "colors": {
+            "bg": "#F5EDFD",
+            "edge": "#D3BFE8",
+            "ink": "#514065",
+            "accent": "#A079BF",
+            "soft": "#E6D9F3"
+          }
+        },
+        {
+          "id": "halloween-midnight-witch",
+          "name": "Midnight Witch",
+          "colors": {
+            "bg": "#2C233A",
+            "edge": "#735C83",
+            "ink": "#F9EAFE",
+            "accent": "#EAA4D3",
+            "soft": "#44304F"
+          }
+        }
+      ]
+    },
+    {
+      "id": "christmas",
+      "name": "Christmas",
+      "palettes": [
+        {
+          "id": "christmas-classic-christmas",
+          "name": "Classic Christmas",
+          "colors": {
+            "bg": "#FFF8E8",
+            "edge": "#C5A04B",
+            "ink": "#174C35",
+            "accent": "#B32735",
+            "soft": "#F1E2B9"
+          }
+        },
+        {
+          "id": "christmas-cozy-hearth",
+          "name": "Cozy Hearth",
+          "colors": {
+            "bg": "#FBF2E5",
+            "edge": "#BA976B",
+            "ink": "#4E352D",
+            "accent": "#A94836",
+            "soft": "#EEDBC1"
+          }
+        },
+        {
+          "id": "christmas-snowy-tradition",
+          "name": "Snowy Tradition",
+          "colors": {
+            "bg": "#F7FAF6",
+            "edge": "#B7C8BE",
+            "ink": "#254D3D",
+            "accent": "#A92F3E",
+            "soft": "#E4ECE4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fall",
+      "name": "Fall",
+      "palettes": [
+        {
+          "id": "fall-harvest-amber",
+          "name": "Harvest Amber",
+          "colors": {
+            "bg": "#FFF3DC",
+            "edge": "#D1AB65",
+            "ink": "#624021",
+            "accent": "#B56F23",
+            "soft": "#F3DFB5"
+          }
+        },
+        {
+          "id": "fall-pumpkin-spice",
+          "name": "Pumpkin Spice",
+          "colors": {
+            "bg": "#FFF2E5",
+            "edge": "#DBB18C",
+            "ink": "#633D2B",
+            "accent": "#BE632F",
+            "soft": "#F7DDC3"
+          }
+        },
+        {
+          "id": "fall-maple-rose",
+          "name": "Maple Rose",
+          "colors": {
+            "bg": "#FAEDE7",
+            "edge": "#D6ADA3",
+            "ink": "#633D42",
+            "accent": "#AE6872",
+            "soft": "#F0D6CD"
+          }
+        }
+      ]
+    },
+    {
+      "id": "winter",
+      "name": "Winter",
+      "palettes": [
+        {
+          "id": "winter-frosted-blue",
+          "name": "Frosted Blue",
+          "colors": {
+            "bg": "#F0F8FF",
+            "edge": "#B7D2E6",
+            "ink": "#34556D",
+            "accent": "#6A9FC3",
+            "soft": "#DCECF7"
+          }
+        },
+        {
+          "id": "winter-silver-pine",
+          "name": "Silver Pine",
+          "colors": {
+            "bg": "#F1F5F2",
+            "edge": "#BAC9C2",
+            "ink": "#304D43",
+            "accent": "#729386",
+            "soft": "#E0E8E3"
+          }
+        },
+        {
+          "id": "winter-soft-snow",
+          "name": "Soft Snow",
+          "colors": {
+            "bg": "#FCFBF8",
+            "edge": "#D9D8D4",
+            "ink": "#50545B",
+            "accent": "#A2B1C2",
+            "soft": "#EBEEF1"
+          }
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "banner",
+      "resource": {
+        "path": "assets/banner.png",
+        "bytes": 1409,
+        "sha256": "03169930b8556a6730ff999ba5bf81dbf94ced93296396b884cb51b82ef424e9"
+      },
+      "mediaType": "image/png",
+      "width": 960,
+      "height": 240,
+      "alt": "Placeholder artwork: soft pink banner; not a finished approved widget."
+    },
+    {
+      "id": "wallpaper",
+      "resource": {
+        "path": "assets/wallpaper.png",
+        "bytes": 6586,
+        "sha256": "aae302e3c24e887447abce3cb9d596cdf4c41f32c5ff98a944b3630a9485feeb"
+      },
+      "mediaType": "image/png",
+      "width": 1440,
+      "height": 900,
+      "alt": "Placeholder artwork: soft pink wallpaper; not a finished approved widget."
+    },
+    {
+      "id": "sticker",
+      "resource": {
+        "path": "assets/sticker.png",
+        "bytes": 664,
+        "sha256": "9f55797a02224f8fc02822eab47ff7b7f38ae663799eda2d2188d046f294ed34"
+      },
+      "mediaType": "image/png",
+      "width": 128,
+      "height": 128,
+      "alt": "Placeholder artwork: soft pink sticker; not a finished approved widget."
+    }
+  ],
+  "items": [
+    {
+      "id": "strawberry-milk",
+      "name": "Strawberry Milk",
+      "familyId": "coquette-pink",
+      "paletteId": "coquette-pink-classic-coquette",
+      "type": "theme-pack",
+      "legacyTheme": {
+        "id": "strawberry-milk",
+        "name": "Strawberry Milk",
+        "emoji": "🍓",
+        "description": "Creamy blush pink with strawberry-sweet messages",
+        "palette": {
+          "bg": "#fff0f2",
+          "edge": "#f2bfc7",
+          "ink": "#874455",
+          "accent": "#e46d90",
+          "soft": "#ffe2eb"
+        },
+        "layout": "split",
+        "widgets": [
+          "clock",
+          "calendar",
+          "quote",
+          "note"
+        ],
+        "quote": "Life is sweeter with a little love. ♡",
+        "note": "Today's forecast: little joys and big smiles! 🍓",
+        "countdown_title": "Our special day",
+        "countdown_date": "2026-12-25"
+      }
+    },
+    {
+      "id": "pink-moonlight",
+      "name": "Pink Moonlight",
+      "familyId": "coquette-pink",
+      "paletteId": "coquette-pink-rose-petal",
+      "type": "theme-pack",
+      "legacyTheme": {
+        "id": "pink-moonlight",
+        "name": "Pink Moonlight",
+        "emoji": "🌙",
+        "description": "Dreamy pale lilac and soft rose for cozy evenings",
+        "palette": {
+          "bg": "#f8ecfa",
+          "edge": "#e7cbe8",
+          "ink": "#64486d",
+          "accent": "#c281bd",
+          "soft": "#f2def3"
+        },
+        "layout": "right",
+        "widgets": [
+          "clock",
+          "quote",
+          "countdown"
+        ],
+        "quote": "Even the stars are cheering for you. ✨",
+        "note": "You deserve gentle, beautiful moments. ♡",
+        "countdown_title": "Christmas magic",
+        "countdown_date": "2026-12-25"
+      }
+    },
+    {
+      "id": "rose-garden",
+      "name": "Rose Garden",
+      "familyId": "coquette-pink",
+      "paletteId": "coquette-pink-champagne-blush",
+      "type": "theme-pack",
+      "legacyTheme": {
+        "id": "rose-garden",
+        "name": "Rose Garden",
+        "emoji": "🌹",
+        "description": "Warm rose petals and old-fashioned romance",
+        "palette": {
+          "bg": "#fff3f1",
+          "edge": "#f2c8c1",
+          "ink": "#7e4d56",
+          "accent": "#d68a9a",
+          "soft": "#ffdfdb"
+        },
+        "layout": "left",
+        "widgets": [
+          "clock",
+          "calendar",
+          "quote"
+        ],
+        "quote": "A little more love in every ordinary day. ♡",
+        "note": "You make life beautiful.",
+        "countdown_title": "A lovely occasion",
+        "countdown_date": "2026-12-25"
+      }
+    },
+    {
+      "id": "pink-pumpkin-patch",
+      "name": "Pink Pumpkin Patch",
+      "familyId": "halloween",
+      "paletteId": "halloween-pink-pumpkin-patch",
+      "type": "theme-pack",
+      "legacyTheme": {
+        "id": "pink-pumpkin-patch",
+        "name": "Pink Pumpkin Patch",
+        "emoji": "🎃",
+        "description": "Halloween · Blush pumpkins, peach ribbons and cozy candy vibes",
+        "palette": {
+          "bg": "#FFF0E8",
+          "edge": "#F2C4B6",
+          "ink": "#753F4B",
+          "accent": "#DB8A9F",
+          "soft": "#FFE0D7"
+        },
+        "layout": "split",
+        "widgets": [
+          "clock",
+          "calendar",
+          "quote",
+          "countdown"
+        ],
+        "quote": "A little spooky and a lot of sweet. ♡",
+        "note": "Pumpkin kisses and cozy wishes. 🎃",
+        "countdown_title": "Halloween Night",
+        "countdown_date": "2026-10-31"
+      }
+    },
+    {
+      "id": "lavender-ghost-party",
+      "name": "Lavender Ghost Party",
+      "familyId": "halloween",
+      "paletteId": "halloween-lavender-ghost",
+      "type": "theme-pack",
+      "legacyTheme": {
+        "id": "lavender-ghost-party",
+        "name": "Lavender Ghost Party",
+        "emoji": "👻",
+        "description": "Halloween · Playful ghostly lilac with marshmallow pink",
+        "palette": {
+          "bg": "#F5EDFD",
+          "edge": "#DCCAF2",
+          "ink": "#5E4A74",
+          "accent": "#AD8BCF",
+          "soft": "#E7D8F8"
+        },
+        "layout": "right",
+        "widgets": [
+          "clock",
+          "quote",
+          "note",
+          "countdown"
+        ],
+        "quote": "Too cute to spook! 👻",
+        "note": "Little ghosts, sweet treats, magical nights. ♡",
+        "countdown_title": "Trick or Treat",
+        "countdown_date": "2026-10-31"
+      }
+    },
+    {
+      "id": "midnight-witch",
+      "name": "Midnight Witch",
+      "familyId": "halloween",
+      "paletteId": "halloween-midnight-witch",
+      "type": "theme-pack",
+      "legacyTheme": {
+        "id": "midnight-witch",
+        "name": "Midnight Witch",
+        "emoji": "🔮",
+        "description": "Halloween · Midnight plum, pink magic and soft witchy sparkle",
+        "palette": {
+          "bg": "#2C233A",
+          "edge": "#735C83",
+          "ink": "#F9EAFE",
+          "accent": "#EAA4D3",
+          "soft": "#44304F"
+        },
+        "layout": "left",
+        "widgets": [
+          "clock",
+          "calendar",
+          "quote",
+          "countdown"
+        ],
+        "quote": "Every little moonbeam feels like magic. ✨",
+        "note": "A cozy evening, a little mystery, and pink starlight. 🌙",
+        "countdown_title": "Halloween Magic",
+        "countdown_date": "2026-10-31"
+      }
+    },
+    {
+      "id": "pumpkin-spice-cozy",
+      "name": "Pumpkin Spice Cozy",
+      "familyId": "fall",
+      "paletteId": "fall-harvest-amber",
+      "type": "theme-pack",
+      "legacyTheme": {
+        "id": "pumpkin-spice-cozy",
+        "name": "Pumpkin Spice Cozy",
+        "emoji": "☕",
+        "description": "Thanksgiving · Creamy cinnamon, golden pumpkin and warm hugs",
+        "palette": {
+          "bg": "#FFF3E8",
+          "edge": "#E7C5AA",
+          "ink": "#754C3C",
+          "accent": "#C98762",
+          "soft": "#FFE3CB"
+        },
+        "layout": "split",
+        "widgets": [
+          "clock",
+          "calendar",
+          "quote",
+          "countdown"
+        ],
+        "quote": "Cozy days and thankful hearts. ♡",
+        "note": "Warm drinks, soft blankets, grateful moments. ☕",
+        "countdown_title": "Thanksgiving",
+        "countdown_date": "2026-11-26"
+      }
+    },
+    {
+      "id": "thankful-hearts",
+      "name": "Thankful Hearts",
+      "familyId": "fall",
+      "paletteId": "fall-pumpkin-spice",
+      "type": "theme-pack",
+      "legacyTheme": {
+        "id": "thankful-hearts",
+        "name": "Thankful Hearts",
+        "emoji": "🦃",
+        "description": "Thanksgiving · Dusty rose with soft peach and grateful notes",
+        "palette": {
+          "bg": "#FFF0E9",
+          "edge": "#E8BBB0",
+          "ink": "#704B51",
+          "accent": "#CE887D",
+          "soft": "#FBE1D8"
+        },
+        "layout": "right",
+        "widgets": [
+          "clock",
+          "quote",
+          "note",
+          "countdown"
+        ],
+        "quote": "Grateful for little things and the people I love. ♡",
+        "note": "Today I am thankful for love, laughter and home. 🍂",
+        "countdown_title": "Thanksgiving Day",
+        "countdown_date": "2026-11-26"
+      }
+    },
+    {
+      "id": "rose-gold-harvest",
+      "name": "Rose Gold Harvest",
+      "familyId": "fall",
+      "paletteId": "fall-maple-rose",
+      "type": "theme-pack",
+      "legacyTheme": {
+        "id": "rose-gold-harvest",
+        "name": "Rose Gold Harvest",
+        "emoji": "🍁",
+        "description": "Thanksgiving · Maple, rose gold, and autumn leaves",
+        "palette": {
+          "bg": "#FAE9E1",
+          "edge": "#DDB8A9",
+          "ink": "#674245",
+          "accent": "#B87573",
+          "soft": "#F5D8CB"
+        },
+        "layout": "left",
+        "widgets": [
+          "clock",
+          "calendar",
+          "note",
+          "countdown"
+        ],
+        "quote": "There is beauty in every season of life. 🍁",
+        "note": "Gather together. Slow down. Enjoy the moment. ♡",
+        "countdown_title": "Harvest Gathering",
+        "countdown_date": "2026-11-26"
+      }
+    },
+    {
+      "id": "pink-christmas",
+      "name": "Pink Christmas",
+      "familyId": "christmas",
+      "paletteId": "christmas-classic-christmas",
+      "type": "theme-pack",
+      "legacyTheme": {
+        "id": "pink-christmas",
+        "name": "Pink Christmas",
+        "emoji": "🎄",
+        "description": "Christmas · Blush ornaments, pink sugar and soft holiday cheer",
+        "palette": {
+          "bg": "#FFF0F6",
+          "edge": "#F0BDCF",
+          "ink": "#79445C",
+          "accent": "#D8759D",
+          "soft": "#FFDBEA"
+        },
+        "layout": "split",
+        "widgets": [
+          "clock",
+          "calendar",
+          "quote",
+          "countdown"
+        ],
+        "quote": "May your days be merry, bright and beautifully pink. ♡",
+        "note": "Cozy lights, holiday hugs, little moments of joy. 🎀",
+        "countdown_title": "Christmas Morning",
+        "countdown_date": "2026-12-25"
+      }
+    },
+    {
+      "id": "candy-cane-cutie",
+      "name": "Candy Cane Cutie",
+      "familyId": "christmas",
+      "paletteId": "christmas-cozy-hearth",
+      "type": "theme-pack",
+      "legacyTheme": {
+        "id": "candy-cane-cutie",
+        "name": "Candy Cane Cutie",
+        "emoji": "🍬",
+        "description": "Christmas · Candy stripes, vanilla cream and cheerful rosy red",
+        "palette": {
+          "bg": "#FFFAF7",
+          "edge": "#EDBCC4",
+          "ink": "#79434B",
+          "accent": "#CB607B",
+          "soft": "#FBE3E5"
+        },
+        "layout": "right",
+        "widgets": [
+          "clock",
+          "quote",
+          "note",
+          "countdown"
+        ],
+        "quote": "Sweet wishes and candy-cane kisses. 🍬",
+        "note": "Cookies, cocoa and Christmas magic. ♡",
+        "countdown_title": "Christmas Eve",
+        "countdown_date": "2026-12-24"
+      }
+    },
+    {
+      "id": "sugarplum-snow",
+      "name": "Sugarplum Snow",
+      "familyId": "christmas",
+      "paletteId": "christmas-snowy-tradition",
+      "type": "theme-pack",
+      "legacyTheme": {
+        "id": "sugarplum-snow",
+        "name": "Sugarplum Snow",
+        "emoji": "❄️",
+        "description": "Christmas · Snowy lavender, fairy lights and sugarplum dreams",
+        "palette": {
+          "bg": "#F5F1FE",
+          "edge": "#D8C9EC",
+          "ink": "#5D4E76",
+          "accent": "#A387CA",
+          "soft": "#E8DEFA"
+        },
+        "layout": "left",
+        "widgets": [
+          "clock",
+          "calendar",
+          "quote",
+          "countdown"
+        ],
+        "quote": "All is calm, all is bright. ❄️",
+        "note": "Soft snowflakes and sweet winter dreams. ✨",
+        "countdown_title": "Christmas Day",
+        "countdown_date": "2026-12-25"
+      }
+    },
+    {
+      "id": "new-year-sparkle",
+      "name": "New Year Sparkle",
+      "familyId": "winter",
+      "paletteId": "winter-frosted-blue",
+      "type": "theme-pack",
+      "legacyTheme": {
+        "id": "new-year-sparkle",
+        "name": "New Year Sparkle",
+        "emoji": "✨",
+        "description": "New Year · Rose-gold glow, champagne cream and fresh beginnings",
+        "palette": {
+          "bg": "#FFF4ED",
+          "edge": "#EECFBD",
+          "ink": "#72525D",
+          "accent": "#C59A92",
+          "soft": "#FFE5D9"
+        },
+        "layout": "split",
+        "widgets": [
+          "clock",
+          "calendar",
+          "quote",
+          "countdown"
+        ],
+        "quote": "A new year, a little more sparkle, a lot more love. ✨",
+        "note": "Here is to wonderful new beginnings. ♡",
+        "countdown_title": "New Year 2027",
+        "countdown_date": "2027-01-01"
+      }
+    },
+    {
+      "id": "blush-clock",
+      "name": "Blush Clock",
+      "familyId": "coquette-pink",
+      "paletteId": "coquette-pink-classic-coquette",
+      "type": "clock",
+      "config": {
+        "style": "digital",
+        "hourCycle": "system",
+        "showSeconds": false
+      }
+    },
+    {
+      "id": "blush-calendar",
+      "name": "Blush Calendar",
+      "familyId": "coquette-pink",
+      "paletteId": "coquette-pink-classic-coquette",
+      "type": "calendar",
+      "config": {
+        "firstWeekday": "system",
+        "showWeekNumbers": false
+      }
+    },
+    {
+      "id": "blush-note",
+      "name": "Blush Note",
+      "familyId": "coquette-pink",
+      "paletteId": "coquette-pink-classic-coquette",
+      "type": "note",
+      "config": {
+        "placeholder": "A little joy today…",
+        "maxCharacters": 4000
+      }
+    },
+    {
+      "id": "blush-wallpaper",
+      "name": "Blush Wallpaper",
+      "familyId": "coquette-pink",
+      "paletteId": "coquette-pink-classic-coquette",
+      "type": "wallpaper",
+      "config": {
+        "assetId": "wallpaper",
+        "fit": "fill"
+      }
+    },
+    {
+      "id": "blush-sticker",
+      "name": "Blush Sticker",
+      "familyId": "coquette-pink",
+      "paletteId": "coquette-pink-classic-coquette",
+      "type": "sticker",
+      "config": {
+        "assetId": "sticker",
+        "defaultWidth": 128
+      }
+    },
+    {
+      "id": "blush-studio-pack",
+      "name": "Blush Studio Pack",
+      "familyId": "coquette-pink",
+      "paletteId": "coquette-pink-classic-coquette",
+      "type": "theme-pack",
+      "components": [
+        "blush-clock",
+        "blush-calendar",
+        "blush-note",
+        "blush-wallpaper",
+        "blush-sticker"
+      ]
+    }
+  ],
+  "home": {
+    "defaultBanner": {
+      "id": "welcome",
+      "headline": "Make Your Desktop Beautiful.",
+      "subtitle": "A little joy, a little pink, a space for you. Placeholder preview.",
+      "message": "Make Your Desktop Beautiful.",
+      "image": {
+        "assetId": "banner",
+        "alt": "Placeholder pink gradient banner; not finished approved widget artwork."
+      }
+    },
+    "banners": [
+      {
+        "id": "fall-example",
+        "headline": "A cozy corner for fall.",
+        "subtitle": "Explore the placeholder collection.",
+        "message": "A cozy corner for fall.",
+        "image": {
+          "assetId": "banner",
+          "alt": "Placeholder pink gradient for the fall announcement."
+        },
+        "button": {
+          "label": "Explore the pack",
+          "action": {
+            "type": "open-item",
+            "itemId": "blush-studio-pack"
+          }
+        },
+        "startsAt": "2026-10-01T00:00:00Z",
+        "endsAt": "2026-12-01T00:00:00Z",
+        "priority": 10
+      }
+    ]
+  }
+}
