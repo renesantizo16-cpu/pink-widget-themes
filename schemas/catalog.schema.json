@@ -724,15 +724,100 @@
               "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
               "maxLength": 80
             },
-            "imageId": {
-              "type": "string",
-              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-              "maxLength": 80
-            },
             "message": {
               "type": "string",
               "minLength": 1,
               "maxLength": 240
+            },
+            "headline": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 240
+            },
+            "subtitle": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 240
+            },
+            "image": {
+              "type": "object",
+              "properties": {
+                "assetId": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "maxLength": 80
+                },
+                "alt": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 240
+                }
+              },
+              "required": [
+                "assetId",
+                "alt"
+              ],
+              "additionalProperties": false
+            },
+            "button": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 240
+                },
+                "action": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "open-item"
+                        },
+                        "itemId": {
+                          "type": "string",
+                          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                          "maxLength": 80
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "itemId"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "open-url"
+                        },
+                        "url": {
+                          "type": "string",
+                          "format": "uri",
+                          "pattern": "^https://[^/@?#]+(?:/|$)"
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "url"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "label",
+                "action"
+              ],
+              "additionalProperties": false
+            },
+            "imageId": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "maxLength": 80
             },
             "action": {
               "oneOf": [
@@ -789,10 +874,27 @@
           },
           "required": [
             "id",
-            "imageId",
             "message"
           ],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "not": {
+                "required": [
+                  "image",
+                  "imageId"
+                ]
+              }
+            },
+            {
+              "not": {
+                "required": [
+                  "button",
+                  "action"
+                ]
+              }
+            }
+          ]
         },
         "banners": {
           "type": "array",
@@ -804,15 +906,100 @@
                 "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
                 "maxLength": 80
               },
-              "imageId": {
-                "type": "string",
-                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-                "maxLength": 80
-              },
               "message": {
                 "type": "string",
                 "minLength": 1,
                 "maxLength": 240
+              },
+              "headline": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "subtitle": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "image": {
+                "type": "object",
+                "properties": {
+                  "assetId": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "maxLength": 80
+                  },
+                  "alt": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 240
+                  }
+                },
+                "required": [
+                  "assetId",
+                  "alt"
+                ],
+                "additionalProperties": false
+              },
+              "button": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 240
+                  },
+                  "action": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "const": "open-item"
+                          },
+                          "itemId": {
+                            "type": "string",
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                            "maxLength": 80
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "itemId"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "const": "open-url"
+                          },
+                          "url": {
+                            "type": "string",
+                            "format": "uri",
+                            "pattern": "^https://[^/@?#]+(?:/|$)"
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "url"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "label",
+                  "action"
+                ],
+                "additionalProperties": false
+              },
+              "imageId": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "maxLength": 80
               },
               "action": {
                 "oneOf": [
@@ -884,13 +1071,28 @@
             },
             "required": [
               "id",
-              "imageId",
               "message",
-              "startsAt",
-              "endsAt",
               "priority"
             ],
-            "additionalProperties": false
+            "additionalProperties": false,
+            "allOf": [
+              {
+                "not": {
+                  "required": [
+                    "image",
+                    "imageId"
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "required": [
+                    "button",
+                    "action"
+                  ]
+                }
+              }
+            ]
           },
           "maxItems": 50
         }

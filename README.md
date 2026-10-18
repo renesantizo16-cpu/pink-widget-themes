@@ -13,9 +13,14 @@ no backend, client dependencies, credentials, telemetry, or deployment workflow.
 The checked-in releases **1.0.0** and **1.0.1** are examples, not a deployment.
 Each includes all 13 original theme packs, five individual sample items, one
 composite pack, static sample artwork, a scheduled banner, and a default banner.
-1.0.1 changes only the fallback message. The three palettes for each family are
+1.0.1 changes only the fallback subtitle. The three palettes for each family are
 available as catalog metadata; examples do not claim to provide finished artwork
-or complete individual collections for every palette.
+or complete individual collections for every palette. All artwork is explicitly
+labeled as placeholders, not finished approved widgets. The proposed announcement
+refresh target is configurable and defaults to 900 seconds (~15 minutes), with
+ETags, caching, backoff and an explicit Refresh action in the Mac consumer.
+Banners support separate headline, subtitle, accessible image and button fields;
+the permanent fallback reads “Make Your Desktop Beautiful.”
 
 ## Validate locally
 

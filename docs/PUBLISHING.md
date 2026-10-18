@@ -3,7 +3,10 @@
 Nothing here deploys or modifies the live root feed. All release files are public
 examples: never include credentials, account identifiers, personal notes or other
 private information. Do not store secrets in JSON, assets, tests or workflow files.
-Original sample artwork has no third-party dependencies.
+Original sample artwork has no third-party dependencies. Every sample asset's alt
+text labels it as placeholder artwork, not a finished approved widget. The two
+release directories are unpublished fixtures within PR #1 and are revised here
+before approval; the immutability rule applies after approval/public consumption.
 
 ## Prepare a release
 
@@ -17,7 +20,13 @@ Original sample artwork has no third-party dependencies.
    is self-contained: asset paths stay inside its own directory.
 3. For each changed asset record exact byte length, SHA-256, actual PNG pixel
    dimensions and alt text. Keep artwork small; use the approved seven families
-   and their three palettes. Add images only when you own their publishing rights.
+   and the exact three approved palettes for each in CONTENT.md. Keep palette IDs
+   stable for future premium artwork and never recolor embedded legacy themes.
+   Keep announcement refreshAfterSeconds at the proposed 900-second target unless
+   deliberately configuring a different interval within schema bounds. Review
+   separate headline/subtitle, accessible image alt, button label/action and UTC
+   date bounds; the fallback must stay permanent with the approved phrase.
+   Add images only when you own their publishing rights.
 4. Print a candidate manifest with the offline helper, then review its diff:
 
    ```sh
@@ -58,7 +67,7 @@ an application configured to use it.
 
 - **1.0.0**: initial 13 legacy packs, 5 individual items, 1 full pack, 21 palettes,
   a scheduled Fall banner and a permanent default.
-- **1.0.1**: same content with revised default banner message; selected by the
+- **1.0.1**: same content with revised default banner subtitle; selected by the
   example manifest. Both directories are checked in for offline review.
 
 For rollback, use the helper with an older retained release and a new publication

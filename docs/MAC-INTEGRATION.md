@@ -8,7 +8,7 @@ AppKit/SwiftUI APIs available on macOS 12. No WebView, Node, database server,
 Python runtime or image animation is needed in the shipping app.
 
 1. Bundle the existing 13 themes, a compatible catalog and a default banner/image
-   as offline resources. Configure the final HTTPS manifest URL in app-owned
+   as offline resources, including “Make Your Desktop Beautiful.” Configure the final HTTPS manifest URL in app-owned
    settings after publishing approval. Until then use bundled data or a local
    fixture server in development. Do not hardcode a feature-branch URL in a release.
 2. Decode separate legacy and v1 DTOs. Check `schemaVersion` before decoding a
@@ -17,8 +17,14 @@ Python runtime or image animation is needed in the shipping app.
    Port the validator's checks; Codable alone does not enforce the JSON Schema.
 3. Fetch the manifest with URLSession in the background; timeout after 15 seconds,
    cap it at 64 KiB while streaming, and use ETag/If-None-Match or Last-Modified.
-   Honor refreshAfterSeconds (minimum one hour), refresh on launch if stale, add
-   jitter and back off on errors. Keep at most two requests active. No busy polling.
+   Use a configurable 900-second (~15-minute) announcement target, constrained
+   to 300–604800 seconds, from refreshAfterSeconds or an app preference. Refresh
+   on launch/resume when stale, add jitter, coalesce requests, and exponentially
+   back off on errors while honoring Retry-After. Pause automatic fetching while
+   asleep; keep at most two requests active. Add an explicit Refresh option that
+   conditionally revalidates immediately (bypasses freshness TTL, keeps ETags and
+   asset caches), coalesces repeated clicks, and preserves content on failure.
+   Implement the detailed policy in CONTENT.md; no busy polling.
 4. Resolve only validated relative resource paths against the configured HTTPS
    origin. Forbid path traversal, encoded separators, credentials and origin changes;
    validate every redirect or reject redirects. Require HTTPS and default port.
@@ -33,10 +39,18 @@ Python runtime or image animation is needed in the shipping app.
 6. Implement individual clock, calendar, note, wallpaper and sticker renderers;
    implement atomic, reversible component pack selection. Adapt `legacyTheme` to
    the current renderer without changing its quote, note or countdown behavior.
+   Resolve approved family-prefixed palette IDs for new artwork, but render each
+   legacy pack with its embedded original palette. Its family/palette reference
+   is for catalog discovery and must never recolor an existing legacy theme.
    Keep all user content and preferences local. Legacy countdown dates are fixed,
    not annually recurring; preserve existing behavior after they pass.
 7. Implement UTC banner selection and boundary timers as specified in CONTENT.md.
-   Show plain text and alt text, enforce permitted actions, and require an explicit
+   Decode optional headline, subtitle, image {assetId, alt}, and button
+   {label, action} independently. Use message as title when headline is absent;
+   omit missing subtitle, image or button. Accept earlier imageId/action aliases
+   only when the corresponding new field is absent. Missing start/end means an
+   open schedule boundary; the permanent fallback forbids both. Show plain text
+   and VoiceOver alt text, enforce permitted actions, and require an explicit
    click to open an HTTPS URL through NSWorkspace. Use a reviewed host allowlist;
    default to disabling external URL actions until one is configured.
 8. On offline, corrupt data, incompatible versions or failed assets, retain the
@@ -62,5 +76,8 @@ redirect failures, truncated files, corrupt hashes, unknown protocol, newer app
 requirements, expired/overlapping schedules, sleep/resume and clock changes,
 image decode failure, disk full, interrupted download and pack application,
 rollback to an older release, local note preservation, VoiceOver and memory
-pressure. Python tests here verify publishing contracts and banner rules; they
+pressure. Also test the explicit Refresh action, adjustable 15-minute cadence,
+backoff/Retry-After, optional banner fields and open date bounds, the permanent
+approved fallback phrase, and unchanged legacy colors after approved palette
+associations are loaded. Python tests here verify publishing contracts and banner rules; they
 do not establish native UI performance or macOS runtime compatibility.

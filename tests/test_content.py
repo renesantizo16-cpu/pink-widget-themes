@@ -102,8 +102,8 @@ class ContentTests(unittest.TestCase):
         self.invalid(lambda c: c['home']['defaultBanner'].update(endsAt='2026-12-01T00:00:00Z'))
 
     def test_banner_references(self):
-        self.invalid(lambda c: c['home']['defaultBanner'].update(imageId='absent'))
-        self.invalid(lambda c: c['home']['banners'][0]['action'].update(itemId='absent'))
+        self.invalid(lambda c: c['home']['defaultBanner']['image'].update(assetId='absent'))
+        self.invalid(lambda c: c['home']['banners'][0]['button']['action'].update(itemId='absent'))
 
     def test_url_action(self):
         action = {'type':'open-url', 'url':'https://example.com/themes', 'label':'Explore'}
@@ -126,6 +126,117 @@ class ContentTests(unittest.TestCase):
         self.assertEqual(at('2026-10-01T00:00:00Z'), 'another')
         second['priority'] = 10
         self.assertEqual(at('2026-10-01T00:00:00Z'), 'another')
+
+    def test_exact_approved_palette_lineup(self):
+        expected = {
+            'Coquette Pink': ['Classic Coquette', 'Rose Petal', 'Champagne Blush'],
+            'Soft Elegant': ['Warm Linen', 'Botanical Blush', 'Taupe Rose'],
+            'Minimalist': ['Warm Minimal', 'Stone & Blush', 'Charcoal Contrast'],
+            'Halloween': ['Pink Pumpkin Patch', 'Lavender Ghost', 'Midnight Witch'],
+            'Christmas': ['Classic Christmas', 'Cozy Hearth', 'Snowy Tradition'],
+            'Fall': ['Harvest Amber', 'Pumpkin Spice', 'Maple Rose'],
+            'Winter': ['Frosted Blue', 'Silver Pine', 'Soft Snow'],
+        }
+        self.assertEqual({f['name']: [p['name'] for p in f['palettes']]
+                          for f in self.catalog['families']}, expected)
+        palettes = [p for f in self.catalog['families'] for p in f['palettes']]
+        self.assertEqual(len({p['id'] for p in palettes}), 21)
+        self.assertTrue(set(p['id'] for p in palettes).isdisjoint(
+            t['id'] for t in self.legacy['themes']))
+        self.assertEqual(len({tuple(p['colors'].values()) for p in palettes}), 21)
+
+    def test_unapproved_palette_name_or_id(self):
+        self.invalid(lambda c: c['families'][0]['palettes'][0].update(name='Strawberry Milk'))
+        self.invalid(lambda c: c['families'][0]['palettes'][0].update(id='strawberry-milk'))
+
+    def test_classic_christmas_traditional_colors(self):
+        colors = next(p['colors'] for f in self.catalog['families']
+                      for p in f['palettes'] if p['name'] == 'Classic Christmas')
+        rgb = lambda color: tuple(int(color[i:i+2], 16) for i in (1, 3, 5))
+        red, green, gold = (rgb(colors[k]) for k in ['accent', 'ink', 'edge'])
+        self.assertGreater(red[0], max(red[1:]))
+        self.assertGreater(green[1], max(green[0], green[2]))
+        self.assertGreater(gold[0], gold[1])
+        self.assertGreater(gold[1], gold[2])
+
+    def test_legacy_rendering_is_independent_of_new_palettes(self):
+        originals = {t['id']: t for t in self.legacy['themes']}
+        families = {f['id']: f for f in self.catalog['families']}
+        differences = 0
+        for item in self.catalog['items']:
+            if 'legacyTheme' not in item:
+                continue
+            self.assertEqual(item['legacyTheme'], originals[item['id']])
+            colors = next(p['colors'] for p in families[item['familyId']]['palettes']
+                          if p['id'] == item['paletteId'])
+            differences += colors != item['legacyTheme']['palette']
+        self.assertGreater(differences, 0)
+
+    def test_refresh_target_and_configurable_bounds(self):
+        manifest = load(ROOT / 'content/v1/manifest.json')
+        self.assertEqual(manifest['refreshAfterSeconds'], 900)
+        for interval in [300, 600, 900, 1800, 604800]:
+            schema_check(dict(manifest, refreshAfterSeconds=interval), 'manifest')
+        for interval in [0, 299, 604801, 900.5, '900']:
+            with self.subTest(interval=interval), self.assertRaises(ValidationError):
+                schema_check(dict(manifest, refreshAfterSeconds=interval), 'manifest')
+
+    def test_permanent_fallback_phrase(self):
+        home = self.catalog['home']
+        self.assertEqual(home['defaultBanner']['headline'], 'Make Your Desktop Beautiful.')
+        self.assertEqual(home['defaultBanner']['message'], 'Make Your Desktop Beautiful.')
+        for key, value in [('startsAt', '2026-01-01T00:00:00Z'),
+                           ('endsAt', '2027-01-01T00:00:00Z'), ('priority', 100)]:
+            self.invalid(lambda c: c['home']['defaultBanner'].update({key:value}))
+        for year in [2000, 2100]:
+            self.assertEqual(select_banner(home, datetime(year, 1, 1, tzinfo=timezone.utc))['id'], 'welcome')
+
+    def test_optional_banner_fields_and_date_bounds(self):
+        for bounds in [{}, {'startsAt':'2026-10-01T00:00:00Z'},
+                       {'endsAt':'2026-12-01T00:00:00Z'}]:
+            with self.subTest(bounds=bounds):
+                c = copy.deepcopy(self.catalog)
+                c['home']['banners'] = [dict(id='optional', message='Text only', priority=10, **bounds)]
+                c['home']['defaultBanner'] = {'id':'welcome', 'message':'Make Your Desktop Beautiful.'}
+                validate_catalog(c, self.base, self.legacy)
+                for value, active in [('2026-09-01T00:00:00+00:00', 'startsAt' not in bounds),
+                                      ('2026-10-01T00:00:00+00:00', True),
+                                      ('2026-12-01T00:00:00+00:00', 'endsAt' not in bounds)]:
+                    result = select_banner(c['home'], datetime.fromisoformat(value))['id']
+                    self.assertEqual(result, 'optional' if active else 'welcome')
+
+    def test_accessible_image_and_button_validation(self):
+        self.invalid(lambda c: c['home']['defaultBanner']['image'].pop('alt'))
+        self.invalid(lambda c: c['home']['defaultBanner']['image'].update(alt=''))
+        self.invalid(lambda c: c['home']['banners'][0]['button'].pop('label'))
+        self.invalid(lambda c: c['home']['banners'][0]['button'].pop('action'))
+        self.invalid(lambda c: c['home']['banners'][0]['button']['action'].update(type='run-script'))
+        self.invalid(lambda c: c['home']['defaultBanner'].update(headline=''))
+        self.invalid(lambda c: c['home']['defaultBanner'].update(subtitle=12))
+
+    def test_banner_aliases_are_unambiguous(self):
+        self.invalid(lambda c: c['home']['defaultBanner'].update(imageId='banner'))
+        self.invalid(lambda c: c['home']['banners'][0].update(
+            action={'type':'open-item', 'itemId':'blush-studio-pack', 'label':'Explore'}))
+        c = copy.deepcopy(self.catalog)
+        banner = c['home']['banners'][0]
+        banner['imageId'] = banner.pop('image')['assetId']
+        button = banner.pop('button')
+        banner['action'] = dict(button['action'], label=button['label'])
+        validate_catalog(c, self.base, self.legacy)
+
+    def test_new_button_https_action(self):
+        c = copy.deepcopy(self.catalog)
+        c['home']['banners'][0]['button']['action'] = {'type':'open-url', 'url':'https://example.com/themes'}
+        validate_catalog(c, self.base, self.legacy)
+        for url in ['javascript:alert(1)', 'https://user:pass@example.com/', 'http://example.com/']:
+            self.invalid(lambda c: c['home']['banners'][0]['button'].update(
+                action={'type':'open-url', 'url':url}))
+
+    def test_placeholder_artwork_labels(self):
+        for asset in self.catalog['assets']:
+            self.assertIn('Placeholder', asset['alt'])
+            self.assertIn('not a finished approved widget', asset['alt'])
 
     def test_duplicate_json_keys(self):
         with tempfile.TemporaryDirectory() as directory:

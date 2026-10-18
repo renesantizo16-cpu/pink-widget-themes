@@ -13,6 +13,28 @@ FAMILIES = dict(zip(
     ['coquette-pink', 'soft-elegant', 'minimalist', 'halloween', 'christmas', 'fall', 'winter'],
     ['Coquette Pink', 'Soft Elegant', 'Minimalist', 'Halloween', 'Christmas', 'Fall', 'Winter']))
 
+APPROVED_PALETTES = {'coquette-pink': {'coquette-pink-classic-coquette': 'Classic Coquette',
+                   'coquette-pink-rose-petal': 'Rose Petal',
+                   'coquette-pink-champagne-blush': 'Champagne Blush'},
+ 'soft-elegant': {'soft-elegant-warm-linen': 'Warm Linen',
+                  'soft-elegant-botanical-blush': 'Botanical Blush',
+                  'soft-elegant-taupe-rose': 'Taupe Rose'},
+ 'minimalist': {'minimalist-warm-minimal': 'Warm Minimal',
+                'minimalist-stone-and-blush': 'Stone & Blush',
+                'minimalist-charcoal-contrast': 'Charcoal Contrast'},
+ 'halloween': {'halloween-pink-pumpkin-patch': 'Pink Pumpkin Patch',
+               'halloween-lavender-ghost': 'Lavender Ghost',
+               'halloween-midnight-witch': 'Midnight Witch'},
+ 'christmas': {'christmas-classic-christmas': 'Classic Christmas',
+               'christmas-cozy-hearth': 'Cozy Hearth',
+               'christmas-snowy-tradition': 'Snowy Tradition'},
+ 'fall': {'fall-harvest-amber': 'Harvest Amber',
+          'fall-pumpkin-spice': 'Pumpkin Spice',
+          'fall-maple-rose': 'Maple Rose'},
+ 'winter': {'winter-frosted-blue': 'Frosted Blue',
+            'winter-silver-pine': 'Silver Pine',
+            'winter-soft-snow': 'Soft Snow'}}
+
 
 def load(path):
     def unique(pairs):
@@ -61,7 +83,8 @@ def utc(value):
 
 def select_banner(home, now):
     """UTC start inclusive/end exclusive; highest priority then ascending ID."""
-    active = [b for b in home['banners'] if utc(b['startsAt']) <= now < utc(b['endsAt'])]
+    active = [b for b in home['banners'] if ('startsAt' not in b or utc(b['startsAt']) <= now)
+              and ('endsAt' not in b or now < utc(b['endsAt']))]
     return sorted(active, key=lambda b: (-b['priority'], b['id']))[0] if active else home['defaultBanner']
 
 
@@ -73,6 +96,8 @@ def validate_catalog(catalog, base, legacy, root=ROOT):
     for fid, family in families.items():
         require(family['name'] == FAMILIES[fid], 'family name does not match ID')
         palettes[fid] = indexed(family['palettes'])
+        require({pid: p['name'] for pid, p in palettes[fid].items()} == APPROVED_PALETTES[fid],
+                'palette IDs/names must match the approved blueprint')
     assets = indexed(catalog['assets'])
     for asset in assets.values():
         _, data = resource_check(asset['resource'], base, '.png')
@@ -91,14 +116,16 @@ def validate_catalog(catalog, base, legacy, root=ROOT):
     originals = {t['id']: t for t in legacy['themes']}
     embedded = {i['id']: i['legacyTheme'] for i in items.values() if 'legacyTheme' in i}
     require(embedded == originals, 'all 13 legacy themes must be preserved exactly')
-    require(all(i['legacyTheme']['id'] == i['id'] and i['legacyTheme']['palette'] == palettes[i['familyId']][i['paletteId']]['colors'] for i in items.values() if 'legacyTheme' in i), 'legacy identity/palette mismatch')
+    require(all(i['legacyTheme']['id'] == i['id'] for i in items.values() if 'legacyTheme' in i), 'legacy identity mismatch')
     home = catalog['home']
     indexed([home['defaultBanner']] + home['banners'])
     for banner in [home['defaultBanner']] + home['banners']:
-        require(banner['imageId'] in assets, 'missing banner image')
-        if 'startsAt' in banner:
+        image_id = banner.get('image', {}).get('assetId', banner.get('imageId'))
+        if image_id is not None:
+            require(image_id in assets, 'missing banner image')
+        if 'startsAt' in banner and 'endsAt' in banner:
             require(utc(banner['startsAt']) < utc(banner['endsAt']), 'banner schedule must have start before end')
-        action = banner.get('action', {})
+        action = banner.get('button', {}).get('action', banner.get('action', {}))
         if action.get('type') == 'open-item':
             require(action['itemId'] in items, 'missing banner action target')
         if action.get('type') == 'open-url':
