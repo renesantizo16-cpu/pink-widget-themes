@@ -1,0 +1,71 @@
+{
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "release": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "minimumAppVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "minimumOSVersion": {
+      "const": "12.0"
+    },
+    "catalog": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^(?:[a-zA-Z0-9_-][a-zA-Z0-9_.-]*/)*[a-zA-Z0-9_.-]+\\.(?:json|png)$",
+          "maxLength": 240
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8388608
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "path",
+        "bytes",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "legacyPath": {
+      "const": "../../widget-themes.json"
+    },
+    "refreshAfterSeconds": {
+      "type": "integer",
+      "minimum": 3600,
+      "maximum": 604800
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "release",
+    "publishedAt",
+    "minimumAppVersion",
+    "minimumOSVersion",
+    "catalog",
+    "legacyPath",
+    "refreshAfterSeconds"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pink-widget-studio.invalid/schemas/v1/manifest.schema.json",
+  "title": "Pink Widget Studio manifest v1"
+}
